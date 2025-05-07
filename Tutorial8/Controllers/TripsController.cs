@@ -9,10 +9,12 @@ namespace Tutorial8.Controllers
     public class TripsController : ControllerBase
     {
         private readonly ITripsService _tripsService;
+        //private readonly IClientService _clientService;
 
         public TripsController(ITripsService tripsService)
         {
             _tripsService = tripsService;
+            //_clientService = clientService;
         }
 
         [HttpGet]
@@ -25,11 +27,11 @@ namespace Tutorial8.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTrip(int id)
         {
-            // if( await DoesTripExist(id)){
-            //  return NotFound();
-            // }
-            // var trip = ... GetTrip(id);
-            return Ok();
+            if( !await _tripsService.DoesTripExist(id)){
+             return NotFound();
+            }
+            var trip = await _tripsService.GetTrip(id);
+            return Ok(trip);
         }
     }
 }
