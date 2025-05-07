@@ -9,12 +9,10 @@ namespace Tutorial8.Controllers
     public class TripsController : ControllerBase
     {
         private readonly ITripsService _tripsService;
-        //private readonly IClientService _clientService;
 
         public TripsController(ITripsService tripsService)
         {
             _tripsService = tripsService;
-            //_clientService = clientService;
         }
 
         [HttpGet]
